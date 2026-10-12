@@ -1,0 +1,392 @@
+/* --- Variables & Global Reset --- */
+:root {
+  --primary-red: #d90429;
+  --accent-mustard: #ffb703;
+  --dark-navy: #1f2937;
+  --creamy-bg: #fffdf7;
+  --card-bg: #ffffff;
+  --border-color: #2b2d42;
+  --shadow-color: rgba(43, 45, 66, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  background-color: var(--creamy-bg);
+  color: var(--dark-navy);
+  line-height: 1.5;
+  background-image: radial-gradient(#e5e7eb 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  padding-bottom: 50px;
+}
+
+/* Retro Diner Checker Banner */
+.checker-banner {
+  height: 24px;
+  width: 100%;
+  background: repeating-conic-gradient(#1f2937 0% 25%, #ffffff 0% 50%) 50% / 24px 24px;
+  border-bottom: 3px solid var(--border-color);
+}
+
+.page-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Neo-Brutalist Diner Card Styling */
+.card, .hero-card {
+  background: var(--card-bg);
+  border: 3.5px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px var(--shadow-color);
+  padding: 28px 24px;
+  margin-bottom: 28px;
+}
+
+/* --- Hero Section --- */
+.hero-card {
+  text-align: center;
+  background: #fff8e8;
+}
+
+.badge-tag {
+  display: inline-block;
+  background: var(--primary-red);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 12px;
+}
+
+.main-title {
+  font-family: 'Bungee', cursive;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--dark-navy);
+  margin-bottom: 14px;
+}
+
+.highlight-name {
+  color: var(--primary-red);
+  text-shadow: 2px 2px 0px var(--accent-mustard);
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #4b5563;
+}
+
+/* --- Details Grid --- */
+.section-title {
+  font-family: 'Bungee', cursive;
+  font-size: 1.35rem;
+  margin-bottom: 16px;
+  color: var(--dark-navy);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f9fafb;
+  border: 2px solid var(--border-color);
+  padding: 14px 16px;
+  border-radius: 12px;
+}
+
+.detail-item .icon {
+  font-size: 1.9rem;
+}
+
+.detail-item strong {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  color: #6b7280;
+}
+
+.detail-item p {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.badge-highlight {
+  display: inline-block;
+  background-color: var(--accent-mustard);
+  color: #000;
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-color);
+  font-weight: 800 !important;
+}
+
+/* Countdown Bar */
+.countdown-wrapper {
+  background: #fff0f3;
+  border: 2.5px dashed var(--primary-red);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+}
+
+.countdown-label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--primary-red);
+  letter-spacing: 0.5px;
+}
+
+.countdown-timer {
+  font-family: 'Bungee', cursive;
+  font-size: 1.35rem;
+  margin-top: 4px;
+  color: var(--dark-navy);
+}
+
+/* --- RSVP Controls --- */
+.rsvp-card {
+  text-align: center;
+}
+
+.rsvp-subtext {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.rsvp-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: 2.5px solid var(--border-color);
+  box-shadow: 4px 4px 0px var(--shadow-color);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--shadow-color);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--shadow-color);
+}
+
+.btn-yes {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.btn-gf {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.rsvp-message {
+  display: none;
+  margin-top: 18px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  border: 2px solid var(--border-color);
+}
+
+.rsvp-message.success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.rsvp-message.info {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+/* --- Forms & Inputs --- */
+.board-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.counter-badge {
+  background: var(--primary-red);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 2px solid var(--border-color);
+}
+
+.section-desc {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.add-entry-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.add-entry-form input {
+  padding: 12px 14px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  flex: 1 1 200px;
+  outline: none;
+}
+
+.add-entry-form input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.2);
+}
+
+.add-entry-form .input-author {
+  flex: 0 1 150px;
+}
+
+.btn-secondary {
+  background: var(--accent-mustard);
+  color: #111;
+  padding: 12px 20px;
+}
+
+/* Empty notices */
+.empty-notice {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #9ca3af;
+  text-align: center;
+  padding: 14px 0;
+}
+
+/* --- 10 Things Numbered List --- */
+.numbered-list {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.numbered-list:empty {
+  padding-left: 0;
+}
+
+.numbered-list li {
+  padding: 10px 14px;
+  background: #fbfbfb;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.author-tag {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+/* --- Desert Stuck Quote & Wall --- */
+.custom-prompt-quote {
+  font-family: 'Shrikhand', cursive;
+  font-size: 1.15rem;
+  background: #fef3c7;
+  border-left: 6px solid var(--accent-mustard);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  color: #78350f;
+  line-height: 1.4;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.note-card {
+  background: #fff;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 3px 3px 0px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-text {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--dark-navy);
+  margin-bottom: 10px;
+}
+
+.note-footer {
+  text-align: right;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary-red);
+}
+
+/* --- Footer --- */
+.footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Responsive adjustment */
+@media (max-width: 600px) {
+  .card, .hero-card {
+    padding: 20px 16px;
+  }
+  .add-entry-form .input-author {
+    flex: 1 1 100%;
+  }
+}
