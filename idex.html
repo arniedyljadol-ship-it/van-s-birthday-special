@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Van Accel! | Fev's Diner Invitation</title>
+  <!-- Google Fonts for Retro Diner Vibe -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Shrikhand&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Checkered Banner Bar -->
+  <div class="checker-banner"></div>
+
+  <main class="page-container">
+    <!-- Header / Hero Section -->
+    <header class="hero-card">
+      <div class="badge-tag">🚨 OFFICIAL SENIOR’S INNER CIRCLE SUMMONS 🚨</div>
+      <h1 class="main-title">HAPPY BELATED BIRTHDAY,<br><span class="highlight-name">VAN ACCEL!</span></h1>
+      <p class="subtitle">
+        Yes, we know we are <strong>one day late</strong>, but that’s only because you had prioritized plans with your girlfriend (priorities checked, we understand, sir! 🫡). 
+        Now, it’s <strong>Senior’s Inner Circle</strong>'s turn to feed you!
+      </p>
+    </header>
+
+    <!-- Invitation Details Box -->
+    <section class="card invite-details">
+      <h2 class="section-title">📍 The Mission Coordinates</h2>
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="icon">🍔</span>
+          <div>
+            <strong>WHERE:</strong>
+            <p>Fev’s Diner</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="icon">🗓️</span>
+          <div>
+            <strong>WHEN:</strong>
+            <p>This Wednesday @ 7:00 PM</p>
+          </div>
+        </div>
+        <div class="detail-item dress-code-item">
+          <span class="icon">👕</span>
+          <div>
+            <strong>DRESS CODE:</strong>
+            <p class="badge-highlight">Casual & Hungry</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <span class="icon">🎁</span>
+          <div>
+            <strong>ADMISSION:</strong>
+            <p>Your presence + your empty stomach</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Countdown -->
+      <div class="countdown-wrapper">
+        <span class="countdown-label">⏰ COUNTDOWN TO WEDNESDAY DINNER:</span>
+        <div id="countdown" class="countdown-timer">Calculating time...</div>
+      </div>
+    </section>
+
+    <!-- RSVP Section with Playful Buttons -->
+    <section class="card rsvp-card">
+      <h2 class="section-title">Can We Count You In, Van?</h2>
+      <p class="rsvp-subtext">Clicking anything other than YES is not legally permissible by Senior’s Inner Circle.</p>
+      
+      <div class="rsvp-actions">
+        <button id="yesBtn" class="btn btn-yes">
+          🎉 COUNT ME IN! I'LL BE THERE!
+        </button>
+        <button id="gfBtn" class="btn btn-gf">
+          🥺 Ask GF for permission first...
+        </button>
+      </div>
+      <div id="rsvpMessage" class="rsvp-message"></div>
+    </section>
+
+    <!-- Interactive Community Section 1: 10 Things to Describe Van Accel -->
+    <section class="card board-card">
+      <div class="board-header">
+        <h2 class="section-title">🏷️ 10 Things to Describe Van Accel</h2>
+        <span class="counter-badge" id="tenThingsCount">0 / 10 Listed</span>
+      </div>
+      <p class="section-desc">Drop a trait, memory, or inside joke to describe Van. Senior’s Inner Circle, let’s hit all 10!</p>
+
+      <div class="add-entry-form">
+        <input type="text" id="descInput" placeholder="Add a description/trait..." maxlength="80">
+        <input type="text" id="descAuthor" placeholder="Your name" maxlength="30" class="input-author">
+        <button id="addDescBtn" class="btn btn-secondary">Add</button>
+      </div>
+
+      <ol id="descList" class="numbered-list">
+        <!-- Rendered from localStorage -->
+      </ol>
+      <p id="emptyDescNotice" class="empty-notice">No entries yet. Be the first to describe Van!</p>
+    </section>
+
+    <!-- Interactive Community Section 2: Desert Stuck Prompt -->
+    <section class="card board-card">
+      <h2 class="section-title">🏜️ Desert Survival Scenario</h2>
+      <blockquote class="custom-prompt-quote">
+        “If ma stuck ko sa desert, si <strong>Van Accel</strong> akong gusto maka-uban because…”
+      </blockquote>
+
+      <div class="add-entry-form">
+        <input type="text" id="desertInput" placeholder="Finish the sentence..." maxlength="140">
+        <input type="text" id="desertAuthor" placeholder="Your name" maxlength="30" class="input-author">
+        <button id="addDesertBtn" class="btn btn-secondary">Submit</button>
+      </div>
+
+      <div id="desertWall" class="notes-grid">
+        <!-- Rendered from localStorage -->
+      </div>
+      <p id="emptyDesertNotice" class="empty-notice">No answers submitted yet. Leave your reason above!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with ❤️ by <strong>Senior’s Inner Circle</strong> • See you this Wednesday at Fev's Diner, Van Accel!</p>
+    </footer>
+  </main>
+
+  <script>
+    // --- Countdown to Next Wednesday 7:00 PM ---
+    function updateCountdown() {
+      const now = new Date();
+      const target = new Date();
+      
+      let daysUntilWed = (3 - now.getDay() + 7) % 7;
+      if (daysUntilWed === 0 && now.getHours() >= 19) {
+        daysUntilWed = 7;
+      }
+      target.setDate(now.getDate() + daysUntilWed);
+      target.setHours(19, 0, 0, 0);
+
+      const diff = target - now;
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = "🍔 IT'S DINNER TIME! GET TO FEV'S DINER!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('countdown').innerHTML = 
+        `${days}d ${hours}h ${minutes}m ${seconds}s remaining`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // --- RSVP Confetti & Fun Interactivity ---
+    const yesBtn = document.getElementById('yesBtn');
+    const gfBtn = document.getElementById('gfBtn');
+    const rsvpMessage = document.getElementById('rsvpMessage');
+
+    // Restore RSVP status if previously clicked
+    if (localStorage.getItem('van_rsvp_status') === 'confirmed') {
+      rsvpMessage.style.display = 'block';
+      rsvpMessage.className = 'rsvp-message success';
+      rsvpMessage.innerHTML = "🎉 <strong>LOCKED IN!</strong> Senior’s Inner Circle is reserving your seat at Fev's Diner, Van! Come with an empty stomach!";
+    }
+
+    yesBtn.addEventListener('click', () => {
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+      rsvpMessage.style.display = 'block';
+      rsvpMessage.className = 'rsvp-message success';
+      rsvpMessage.innerHTML = "🎉 <strong>LOCKED IN!</strong> Senior’s Inner Circle is reserving your seat at Fev's Diner, Van! Come with an empty stomach!";
+      localStorage.setItem('van_rsvp_status', 'confirmed');
+    });
+
+    const excuses = [
+      "GF said: 'Go lang basta pasalubong!' 🍟",
+      "Request Pending... GF is reviewing terms & conditions! 😂",
+      "GF replied: 'Approved, but Senior’s Inner Circle better bring you home safe!' 😉",
+      "Bouncing out of range! Just click YES already!",
+      "Access Denied: Senior’s Inner Circle summons cannot be declined!"
+    ];
+    let excuseIdx = 0;
+
+    gfBtn.addEventListener('click', () => {
+      const randomX = (Math.random() - 0.5) * 40;
+      const randomY = (Math.random() - 0.5) * 30;
+      gfBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+      rsvpMessage.style.display = 'block';
+      rsvpMessage.className = 'rsvp-message info';
+      rsvpMessage.innerText = excuses[excuseIdx % excuses.length];
+      excuseIdx++;
+    });
+
+    // --- Utility: Escape HTML ---
+    function escapeHtml(string) {
+      return String(string)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // ==========================================
+    // PERSISTENCE LOGIC (LOCAL STORAGE)
+    // ==========================================
+
+    // --- 1. 10 Things to Describe Van Accel ---
+    const descList = document.getElementById('descList');
+    const descInput = document.getElementById('descInput');
+    const descAuthor = document.getElementById('descAuthor');
+    const addDescBtn = document.getElementById('addDescBtn');
+    const tenThingsCount = document.getElementById('tenThingsCount');
+    const emptyDescNotice = document.getElementById('emptyDescNotice');
+
+    function getSavedDescriptions() {
+      try {
+        return JSON.parse(localStorage.getItem('van_descriptions')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveDescriptions(data) {
+      localStorage.setItem('van_descriptions', JSON.stringify(data));
+    }
+
+    function renderDescriptions() {
+      const descriptions = getSavedDescriptions();
+      descList.innerHTML = '';
+      
+      descriptions.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="item-text">${escapeHtml(item.text)}</span> <span class="author-tag">— ${escapeHtml(item.author)}</span>`;
+        descList.appendChild(li);
+      });
+
+      const count = descriptions.length;
+      tenThingsCount.innerText = `${count} / 10 Listed`;
+      if (count > 0) {
+        emptyDescNotice.style.display = 'none';
+      } else {
+        emptyDescNotice.style.display = 'block';
+      }
+      if (count >= 10) {
+        tenThingsCount.style.background = '#059669';
+      } else {
+        tenThingsCount.style.background = 'var(--primary-red)';
+      }
+    }
+
+    addDescBtn.addEventListener('click', () => {
+      const text = descInput.value.trim();
+      const author = descAuthor.value.trim() || 'Senior’s Inner Circle';
+      if (!text) return;
+
+      const current = getSavedDescriptions();
+      current.push({ text, author });
+      saveDescriptions(current);
+
+      renderDescriptions();
+      descInput.value = '';
+      descAuthor.value = '';
+    });
+
+    // --- 2. Desert Stuck Prompt Wall ---
+    const desertWall = document.getElementById('desertWall');
+    const desertInput = document.getElementById('desertInput');
+    const desertAuthor = document.getElementById('desertAuthor');
+    const addDesertBtn = document.getElementById('addDesertBtn');
+    const emptyDesertNotice = document.getElementById('emptyDesertNotice');
+
+    function getSavedDesertNotes() {
+      try {
+        return JSON.parse(localStorage.getItem('van_desert_notes')) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveDesertNotes(data) {
+      localStorage.setItem('van_desert_notes', JSON.stringify(data));
+    }
+
+    function renderDesertNotes() {
+      const notes = getSavedDesertNotes();
+      desertWall.innerHTML = '';
+
+      if (notes.length > 0) {
+        emptyDesertNotice.style.display = 'none';
+      } else {
+        emptyDesertNotice.style.display = 'block';
+      }
+
+      notes.forEach(noteData => {
+        const card = document.createElement('div');
+        card.className = 'note-card';
+        card.innerHTML = `
+          <p class="note-text">"...${escapeHtml(noteData.text)}"</p>
+          <div class="note-footer">— ${escapeHtml(noteData.author)}</div>
+        `;
+        desertWall.appendChild(card);
+      });
+    }
+
+    addDesertBtn.addEventListener('click', () => {
+      const text = desertInput.value.trim();
+      const author = desertAuthor.value.trim() || 'Senior’s Inner Circle';
+      if (!text) return;
+
+      const current = getSavedDesertNotes();
+      // Prepend so the newest shows up first
+      current.unshift({ text, author });
+      saveDesertNotes(current);
+
+      renderDesertNotes();
+      desertInput.value = '';
+      desertAuthor.value = '';
+    });
+
+    // Initial render on page load
+    renderDescriptions();
+    renderDesertNotes();
+  </script>
+</body>
+</html>
